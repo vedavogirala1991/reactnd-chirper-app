@@ -42,19 +42,18 @@ class Tweet extends Component {
           <div>
             <span>{name}</span>
             <div>
-              <span>{formatDate(timestamp)}</span>
-              <p className='reply-to-info'>
-                {parent && (
-                  <button className='replying-to' onClick={(e) => this.toParent(e,parent.id)}>
-                    Replying to @{parent.author}
-                  </button>
-                )}
-              </p>
+              {formatDate(timestamp)}
             </div>
+            {parent && (
+              <button className='replying-to' onClick={(e) => this.toParent(e,parent.id)}>
+                Replying to @{parent.author}
+              </button>
+            )}
+            <p>{text}</p>
           </div>
-          <p>{text}</p>
           <div className='tweet-icons'>
-            <TiArrowBackOutline className='tweet-icon' /><span>{replies!==0 && replies}</span>
+            <TiArrowBackOutline className='tweet-icon' />
+            <span>{replies!==0 && replies}</span>
             <button className='heart-button' onClick={this.handleLike}>
               {hasLiked ===true
                 ? <TiHeartFullOutline color='red' className='tweet-icon'/>
