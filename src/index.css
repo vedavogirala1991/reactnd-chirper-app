@@ -104,6 +104,15 @@ li {
   color: #969696;
   font-size: 15px;
 }
+
+.reply-to-info {
+  color: #969696;
+  font-size: 15px;
+  padding: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
 .tweet-info > div > p {
   font-size: 18px;
   margin: 10px 0;
