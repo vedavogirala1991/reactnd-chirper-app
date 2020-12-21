@@ -4,15 +4,17 @@ import {
   handleInitialData
 } from '../actions/shared'
 
+import Dashboard from './Dashboard'
 class App extends Component {
   componentDidMount () {
     this.props.dispatch(handleInitialData())
   }
   render() {
+    if(this.props.loading){
+      return <h2>Loading...</h2>
+    }
     return (
-      <div>
-        Starter Code
-      </div>
+      <Dashboard />
     )
   }
 }
