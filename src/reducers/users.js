@@ -5,8 +5,8 @@ const users = (state = {}, action) => {
   switch (action.type) {
     case RECIEVE_USERS:
       return {
-        ...state
-        ...action.users
+        ...state,
+        ...action.users,
       }
     default:
       return state

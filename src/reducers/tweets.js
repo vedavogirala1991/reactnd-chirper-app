@@ -5,8 +5,8 @@ const tweets = (state = {}, action) => {
   switch (action.type) {
     case RECIEVE_TWEETS:
       return {
-        ...state
-        ...action.tweets
+        ...state,
+        ...action.tweets,
       }
     default:
       return state
