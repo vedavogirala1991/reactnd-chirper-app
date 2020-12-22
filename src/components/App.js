@@ -4,7 +4,9 @@ import {
   handleInitialData
 } from '../actions/shared'
 
+//UI components
 import Dashboard from './Dashboard'
+import NewTweet from './NewTweet'
 import LoadingBar from 'react-redux-loading'
 
 class App extends Component {
@@ -17,7 +19,7 @@ class App extends Component {
         <LoadingBar/>
         {this.props.loading === true
           ? null
-          : <Dashboard />
+          : <NewTweet />
         }
       </div>
     )
