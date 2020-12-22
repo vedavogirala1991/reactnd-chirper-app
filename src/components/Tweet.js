@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import {connect} from 'react-redux'
 //Helper Utils
 import {formatTweet,formatDate} from '../utils/helpers'
+//Actions
+import {handleToggleTweet} from '../actions/tweets'
 //React icons
 import {
   TiHeartOutline,
@@ -18,7 +20,15 @@ class Tweet extends Component {
   }
   handleLike = (e) => {
     e.preventDefault()
-    //TODO dispatch save likes
+    //Dispatch save likes
+    const { dispatch, tweet, authedUser} = this.props
+    dispatch(handleToggleTweet(
+      {
+        id : tweet.id,
+        hasLiked : tweet.hasLiked,
+        authedUser
+      }
+    ))
   }
   render() {
     const tweet = this.props.tweet
@@ -28,11 +38,11 @@ class Tweet extends Component {
     }
 
     const {
-      name, avatar, timestamp, text, hasLiked, likes, replies, id, parent
+      name, avatar, timestamp, text, hasLiked, likes, replies, parent
     } = tweet
 
     return (
-      <div id={id} className='tweet'>
+      <div className='tweet'>
         <img
           src={avatar}
           alt={`Avatar of ${name}`}
@@ -71,6 +81,7 @@ const mapStateToProps = ({authedUser, users, tweets} , {id}) => {
   const tweet = tweets[id]
   const parentTweet = tweet ? tweets[tweet.replyingTo] : null
   return {
+    authedUser,
     tweet : tweet ?
       formatTweet(tweet,users[tweet.author],authedUser,parentTweet)
         : null
