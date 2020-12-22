@@ -107,10 +107,12 @@ li {
 
 .reply-to-info {
   color: #969696;
-  font-size: 15px;
+  font-size: 13px;
   padding: 0;
   margin-top: 0;
   margin-bottom: 0;
+  border: none;
+  background: none;
 }
 
 .tweet-info > div > p {

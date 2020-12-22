@@ -32,7 +32,7 @@ class Tweet extends Component {
     } = tweet
 
     return (
-      <div className='tweet'>
+      <div id={id} className='tweet'>
         <img
           src={avatar}
           alt={`Avatar of ${name}`}
@@ -45,7 +45,7 @@ class Tweet extends Component {
               {formatDate(timestamp)}
             </div>
             {parent && (
-              <button className='replying-to' onClick={(e) => this.toParent(e,parent.id)}>
+              <button className='reply-to-info' onClick={(e) => this.toParent(e,parent.id)}>
                 Replying to @{parent.author}
               </button>
             )}

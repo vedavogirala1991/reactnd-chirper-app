@@ -5,20 +5,28 @@ import {
 } from '../actions/shared'
 
 import Dashboard from './Dashboard'
+import LoadingBar from 'react-redux-loading'
+
 class App extends Component {
   componentDidMount () {
     this.props.dispatch(handleInitialData())
   }
   render() {
-    if(this.props.loading){
-      return <h2>Loading...</h2>
-    }
     return (
-      <Dashboard />
+      <div>
+        <LoadingBar/>
+        {this.props.loading === true
+          ? null
+          : <Dashboard />
+        }
+      </div>
     )
   }
 }
 
-export default connect((state) => ({
-  loading: state.loading
-}))(App)
+function mapStateToProps ({ authedUser }) {
+  return {
+    loading: authedUser === null
+  }
+}
+export default connect(mapStateToProps)(App)
