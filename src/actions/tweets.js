@@ -1,7 +1,9 @@
-import {saveLikeToggle} from '../utils/api'
+import {saveLikeToggle,saveTweet} from '../utils/api'
+import {showLoading,hideLoading} from 'react-redux-loading'
 
 export const RECIEVE_TWEETS = 'RECIEVE_TWEETS'
 export const TOGGLE_TWEET = 'TOGGLE_TWEET'
+export const ADD_TWEET = 'ADD_TWEET'
 
 export const recieveTweets = (tweets) => {
   return {
@@ -19,6 +21,13 @@ export const toggleTweet = ({id, authedUser, hasLiked}) => {
   }
 }
 
+export const addTweet = (tweet) => {
+  return {
+    type : ADD_TWEET,
+    tweet,
+  }
+}
+
 //Action Creators
 export const handleToggleTweet = (info) => {
   return (dispatch) => {
@@ -28,6 +37,24 @@ export const handleToggleTweet = (info) => {
       console.warn('Error in handleToggleTweet : ',e)
       dispatch(toggleTweet(info))
       alert('There was an error liking the tweet. Try again.')
+    })
+  }
+}
+
+export const handleAddTweet = (text,replyingTo) => {
+  return (dispatch,getState) => {
+    const authedUser = getState()
+    dispatch(showLoading())
+    return saveTweet({
+      text,
+      author : authedUser,
+      replyingTo
+    })
+    .then((tweet) => dispatch(addTweet(tweet)))
+    .then(dispatch(hideLoading()))
+    .catch((e) => {
+      console.warn('Error in handleAddTweet : ',e)
+      alert('There was an error saving the tweet. Try again.')
     })
   }
 }
