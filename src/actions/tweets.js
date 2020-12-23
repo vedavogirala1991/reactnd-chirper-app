@@ -43,8 +43,10 @@ export const handleToggleTweet = (info) => {
 
 export const handleAddTweet = (text,replyingTo) => {
   return (dispatch,getState) => {
-    const authedUser = getState()
+    const {authedUser} = getState()
+
     dispatch(showLoading())
+
     return saveTweet({
       text,
       author : authedUser,
@@ -52,9 +54,9 @@ export const handleAddTweet = (text,replyingTo) => {
     })
     .then((tweet) => dispatch(addTweet(tweet)))
     .then(dispatch(hideLoading()))
-    .catch((e) => {
-      console.warn('Error in handleAddTweet : ',e)
-      alert('There was an error saving the tweet. Try again.')
-    })
+    // .catch((e) => {
+    //   console.warn('Error in handleAddTweet : ',e)
+    //   alert('There was an error saving the tweet. Try again.')
+    // })
   }
 }

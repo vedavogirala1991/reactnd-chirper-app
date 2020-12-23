@@ -18,13 +18,14 @@ class NewTweet extends Component {
 
     const {text} = this.state
     //Add Tweet handling
-    const {dispatch,replyingTo} = this.props
+    const {dispatch,id} = this.props
 
-    dispatch(handleAddTweet({
-      text,
-      replyingTo,
-    }))
+    dispatch(handleAddTweet(text,id))
+    
     console.log('New tweet : ',text);
+    this.setState(()=>({
+      text : ''
+    }))
   }
   render() {
     const {text} = this.state
