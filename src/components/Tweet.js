@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
+import {Link, withRouter} from 'react-router-dom'
 //Helper Utils
 import {formatTweet,formatDate} from '../utils/helpers'
 //Actions
@@ -16,7 +17,7 @@ import {
 class Tweet extends Component {
   toParent = (e,id) => {
     e.preventDefault()
-    //TODO redirect to the parent tweet
+    this.props.history.push(`/tweet/${id}`)
   }
   handleLike = (e) => {
     e.preventDefault()
@@ -38,11 +39,11 @@ class Tweet extends Component {
     }
 
     const {
-      name, avatar, timestamp, text, hasLiked, likes, replies, parent
+      name, avatar, timestamp, text, hasLiked, likes, replies, id, parent
     } = tweet
 
     return (
-      <div className='tweet'>
+      <Link to={`/tweet/${id}`} className='tweet'>
         <img
           src={avatar}
           alt={`Avatar of ${name}`}
@@ -72,7 +73,7 @@ class Tweet extends Component {
             <span>{likes !==0 && likes}</span>
           </div>
         </div>
-      </div>
+      </Link>
     )
   }
 }
@@ -88,4 +89,4 @@ const mapStateToProps = ({authedUser, users, tweets} , {id}) => {
   }
 }
 
-export default connect(mapStateToProps)(Tweet)
+export default withRouter(connect(mapStateToProps)(Tweet))

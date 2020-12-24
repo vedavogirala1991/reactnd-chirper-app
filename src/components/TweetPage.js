@@ -7,7 +7,7 @@ import NewTweet from './NewTweet'
 class TweetPage extends Component {
   render () {
     const {id,replies} = this.props
-    
+
     return (
       <div>
         <Tweet id={id}/>
@@ -26,7 +26,7 @@ class TweetPage extends Component {
 }
 
 const mapStateToProps = ({authedUser, users, tweets} , props) => {
-  const {id} = props.match.param
+  const {id} = props.match.params
   return {
     id,
     replies : !tweets[id]
